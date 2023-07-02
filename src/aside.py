@@ -9,7 +9,7 @@ class asideFrame(ctk.CTkFrame):
 
     # Titulo del frame
     self.label = ctk.CTkLabel(self, text="Combinatoria de\nproposiciones logicas", font=("Helvetica", 16, "bold"))
-    self.label.pack(pady=40, padx=30)
+    self.label.pack(pady=30, padx=30)
     
     # Boton-Generar combinaciones posibles
     self.combinaciones = ctk.CTkButton(self, text="Generar\ncombinatoria", font=("Helvetica", 14, "bold"), command = self.generarCombinatoria)
@@ -24,11 +24,11 @@ class asideFrame(ctk.CTkFrame):
     if len(self.props) >= 2:
       print(self.props)
     else:
-      messagebox.showwarning("showwarning", "¡Debe ingresar al menos 2 proposiciones!")
+      messagebox.showwarning("Advertencia", "¡Debe ingresar al menos 2 proposiciones!")
 
   # Metodo para calcular cierta operacion con las proposiciones almacenadas
   def calcular_operacion(self):
     if len(self.props)>=2:
       print(self.props)
     else:
-      messagebox.showwarning("showwarning", "¡Debe ingresar al menos 2 proposiciones!")
+      messagebox.showwarning("Advertencia", "¡Debe ingresar al menos 2 proposiciones!")

@@ -1,8 +1,10 @@
 import customtkinter as ctk
-
 class frameProp(ctk.CTkFrame):
   def __init__(self, master, info, var):
     super().__init__(master)
+    # Datos del frame
+    self.info = info
+    self.var = var
     # Proposicion almacenada
     self.prop = ctk.CTkEntry(self, font=("Helvetica", 17, "bold"), width=400)
     self.prop.insert(0, info)
@@ -10,16 +12,17 @@ class frameProp(ctk.CTkFrame):
     # Boton para eliminar la proposicion
     self.button = ctk.CTkButton(self, text=f'Eliminar "{var}"', font=("Helvetica", 14, "bold"), command=self.clear, width=300)
     self.button.pack()
-    self.info = info
-    self.var = var
   
   # Metodo para eliminar el frame con la proposicion
   def clear(self):
     self.master.props.remove({self.var:self.info})
     self.master.used.remove(self.var)
     self.master.clearProps.remove(self.info)
-
     self.destroy()
+
+  # Metodo para obtener los datos del frame
+  def getProp(self):
+    return [self.var, self.info]
 
 # Frame para ingresar proposiciones
 class inputFrame(ctk.CTkFrame):
@@ -36,3 +39,7 @@ class inputFrame(ctk.CTkFrame):
     # Boton añadir proposicion
     self.añadir = ctk.CTkButton(self, text="Añadir proposicion", font=("Helvetica", 14, "bold"), command = self.master.añadirProposicion)
     self.añadir.pack(padx=100, fill="x")
+
+    # Eliminar todas las proposiciones almacenadas
+    self.eliminar = ctk.CTkButton(self, text="Eliminar proposiciones", font=("Helvetica", 14, "bold"), command = self.master.eliminarTodo)
+    self.eliminar.pack(pady = 10, padx=100, fill="x")

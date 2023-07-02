@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from tkinter import messagebox
 from src.aside import asideFrame
 from src.input import inputFrame, frameProp
 from src.saved import savedFrame
@@ -11,8 +12,9 @@ class main(ctk.CTk):
     # Informacion de las Proposiciones
     self.props = [] # Lista de diccionarios var, prop
     self.clearProps = [] # Proposiciones limpias
-    self.values = ["p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "ñ", "o"] # Variables para las proposiciones
+    self.values = ["p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "ñ", "o"]
     self.used = [] # Variables usadas
+    self.Frames = [] # Lista de frames con las proposiciones
     # Configurando la ventana principal
     self._set_appearance_mode("dark") # Tema de la aplicacion
     self.title("Lógica proposicional") # Titulo de la aplicacion
@@ -22,7 +24,7 @@ class main(ctk.CTk):
     self.resizable(False, False) # No se escala a pantalla completa (tamaño definido)
 
     # Frame con Scroll
-    self.scroll = savedFrame(self, self.props, self.clearProps, self.values, self.used)
+    self.scroll = savedFrame(self, self.props, self.clearProps, self.used)
     self.scroll.grid(row=0, column=2, padx=10, pady=10, columnspan=3, sticky="nsew")
 
     # Frame lateral
@@ -35,14 +37,21 @@ class main(ctk.CTk):
   
   # Metodo para añadir una nueva proposicion
   def añadirProposicion(self):
-    var = self.selectVar() # Seleccionar el nombre de la variable
-    self.used.append(var) # Añadir la variable dentro de la lista de usadas
-    prop = self.input.entry.get() # Obtener proposicion
-    self.clearProps.append(self.input.entry.get()) # Añadir la proposicion a la lista
-    if prop != "":
-      self.input.entry.delete(0, len(prop)) # Eliminar proposicion del entry
-      self.createFrame(prop, var)
-      self.props.append({var:prop}) # Añadiendo al vector con las proposiciones la proposicion
+    if self.selectVar() != None:
+      var = self.selectVar() # Seleccionar el nombre de la variable
+      self.used.append(var) # Añadir la variable dentro de la lista de usadas
+      prop = self.input.entry.get() # Obtener proposicion
+      self.clearProps.append(self.input.entry.get()) # Añadir la proposicion a la lista
+      if prop != "":
+        self.input.entry.delete(0, len(prop)) # Eliminar proposicion del entry
+        self.createFrame(prop, var)
+        self.props.append({var:prop}) # Añadiendo al vector con las proposiciones la proposicion
+    else:
+      messagebox.showwarning("Limite alcanzado", "¡Ha ingresado el maximo de proposiciones!")
+
+  
+  def eliminarTodo(self):
+    self.scroll.deleteFrames()
   
   # Metodo para elegir la variable a trabajar
   def selectVar(self):
