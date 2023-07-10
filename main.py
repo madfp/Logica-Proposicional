@@ -1,3 +1,4 @@
+import string
 import customtkinter as ctk
 from tkinter import messagebox
 from src.aside import asideFrame
@@ -12,7 +13,7 @@ class main(ctk.CTk):
     # Informacion de las Proposiciones
     self.props = [] # Lista de diccionarios var, prop
     self.clearProps = [] # Proposiciones limpias
-    self.values = ["p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "ñ", "o"]
+    self.values = list(string.ascii_lowercase) # Todas las letras minusculas
     self.used = [] # Variables usadas
     self.Frames = [] # Lista de frames con las proposiciones
     # Configurando la ventana principal
@@ -41,6 +42,7 @@ class main(ctk.CTk):
       var = self.selectVar() # Seleccionar el nombre de la variable
       self.used.append(var) # Añadir la variable dentro de la lista de usadas
       prop = self.input.entry.get() # Obtener proposicion
+      prop = prop.strip() # Eliminar los espacios restantes
       self.clearProps.append(self.input.entry.get()) # Añadir la proposicion a la lista
       if prop != "":
         self.input.entry.delete(0, len(prop)) # Eliminar proposicion del entry
@@ -48,10 +50,6 @@ class main(ctk.CTk):
         self.props.append({var:prop}) # Añadiendo al vector con las proposiciones la proposicion
     else:
       messagebox.showwarning("Limite alcanzado", "¡Ha ingresado el maximo de proposiciones!")
-
-  
-  def eliminarTodo(self):
-    self.scroll.deleteFrames()
   
   # Metodo para elegir la variable a trabajar
   def selectVar(self):

@@ -37,9 +37,5 @@ class inputFrame(ctk.CTkFrame):
     self.entry.pack(padx=60, pady=20, fill="x")
 
     # Boton añadir proposicion
-    self.añadir = ctk.CTkButton(self, text="Añadir proposicion", font=("Helvetica", 14, "bold"), command = self.master.añadirProposicion)
+    self.añadir = ctk.CTkButton(self, text="Añadir proposicion", font=("Helvetica", 14, "bold"), command=self.master.añadirProposicion)
     self.añadir.pack(padx=100, fill="x")
-
-    # Eliminar todas las proposiciones almacenadas
-    self.eliminar = ctk.CTkButton(self, text="Eliminar proposiciones", font=("Helvetica", 14, "bold"), command = self.master.eliminarTodo)
-    self.eliminar.pack(pady = 10, padx=100, fill="x")
