@@ -5,6 +5,7 @@ class combPosibles(ctk.CTkToplevel):
         super().__init__(master, *args, **kwargs)
         self.props = self.master.props # Capturar las proposiciones del elemento padre
         # Configuracion de la ventana
+        self.title("Combinaciones Posibles")
         self.geometry("750x500")
         self.resizable(False, False)
         self.grid_rowconfigure(0, weight=1)
@@ -30,14 +31,10 @@ class combPosibles(ctk.CTkToplevel):
                 var2 = list(j.keys())[0]
                 if i != j:
                     for k in operaciones:
-                        print(info1 + k +info2, var1 + equivalencia.get(k) + var2)
-                        print(negaciones[0]+info1+k+info2, operadores[0]+var1+equivalencia.get(k)+var2)
-                        print(info1+k+negaciones[1]+info2, var1+equivalencia.get(k)+operadores[0]+var2)
-                        print(negaciones[0]+info1+k+negaciones[1]+info2, operadores[0]+var1+equivalencia.get(k)+operadores[0]+var2)
-
-    # Metodo para agregar el frame con la proposicion
-    def addComb(self):
-        pass
+                        self.scroll.addFrame(info1 + k +info2, var1 + equivalencia.get(k) + var2)
+                        self.scroll.addFrame(negaciones[0]+info1+k+info2, operadores[0]+var1+equivalencia.get(k)+var2)
+                        self.scroll.addFrame(info1+k+negaciones[1]+info2, var1+equivalencia.get(k)+operadores[0]+var2)
+                        self.scroll.addFrame(negaciones[0]+info1+k+negaciones[1]+info2, operadores[0]+var1+equivalencia.get(k)+operadores[0]+var2)
 
 # ScrollFrame para agregar frames con las combinaciones
 class scrollFrame(ctk.CTkScrollableFrame):
@@ -47,32 +44,28 @@ class scrollFrame(ctk.CTkScrollableFrame):
         self.label = ctk.CTkLabel(self, text="Combinaciones posibles", font=("Helvetica", 17, "bold"))
         self.label.pack(pady=10)
     
-    def addFrame(self, frame):
-        info = frame(master = self)
-        info.setInfo()
+    def addFrame(self, proposicion, variable):
+        info = frame(self)
+        info.setInfo(proposicion, variable)
+        info.pack(pady = 25)
 
 # Frame con la informacion (operacion/cadena)
 class frame(ctk.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
-        # Entry de la operacion
+        # Entry formula de la operacion
         self.op = ctk.CTkEntry(self, font=("Helvetica", 17, "bold"), width=200)
-        self.op.configure(state="disabled")
         self.op.pack(pady = 10, padx = 20)
 
         # Entry de la cadena resultante
-        self.entry = ctk.CTkEntry(self, font=("Helvetica", 17, "bold"), width=400)
-        self.entry.configure(state="disabled")
+        self.entry = ctk.CTkEntry(self, font=("Helvetica", 17, "bold"), width=600)
         self.entry.pack(pady = 10, padx = 20)
     
     # Metodo para agregar la proposicion molecular
-    def setInfo(self, data):
-        self.entry.configure(state="disabled")
+    def setInfo(self, data, var):
+        # Agregar formula de la operacion
+        self.op.insert(0, var)
+        self.op.configure(state="disabled")
+        # Agregar la proposicion molecular resultante
         self.entry.insert(0, data)
         self.entry.configure(state="disabled")
-
-    # Metodo para agregar la operacion con las variables
-    def setOp(self, data):
-        self.op.configure(state="normal")
-        self.op.insert(0, data)
-        self.op.configure(state="disabled")
