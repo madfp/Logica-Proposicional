@@ -18,7 +18,7 @@ class calcularProp(ctk.CTkToplevel):
 class calculadora(ctk.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
-        # Informacion de la ventana
+        # Informacion de la ventana a calcular
         self.finalData = ""
         self.label = ctk.CTkLabel(self, text="Calcular proposiciones moleculares", font=("Helvetica", 17, "bold"))
         self.label.pack(pady = 20)
