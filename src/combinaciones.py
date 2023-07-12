@@ -41,7 +41,7 @@ class scrollFrame(ctk.CTkScrollableFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
         # add widgets onto the frame, for example:
-        self.label = ctk.CTkLabel(self, text="Combinaciones posibles", font=("Helvetica", 17, "bold"))
+        self.label = ctk.CTkLabel(self, text="Combinaciones posibles de proposiciones moleculares", font=("Helvetica", 17, "bold"))
         self.label.pack(pady=10)
     
     def addFrame(self, proposicion, variable):
@@ -58,7 +58,7 @@ class frame(ctk.CTkFrame):
         self.op.pack(pady = 10, padx = 20)
 
         # Entry de la cadena resultante
-        self.entry = ctk.CTkEntry(self, font=("Helvetica", 17, "bold"), width=600)
+        self.entry = ctk.CTkEntry(self, font=("Helvetica", 14, "bold"), width=650)
         self.entry.pack(pady = 10, padx = 20)
     
     # Metodo para agregar la proposicion molecular

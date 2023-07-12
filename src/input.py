@@ -6,7 +6,7 @@ class frameProp(ctk.CTkFrame):
     self.info = info
     self.var = var
     # Proposicion almacenada
-    self.prop = ctk.CTkEntry(self, font=("Helvetica", 17, "bold"), width=400)
+    self.prop = ctk.CTkEntry(self, font=("Helvetica", 17, "bold"), width=450)
     self.prop.insert(0, info)
     self.prop.pack(pady=20)
     # Boton para eliminar la proposicion
@@ -34,8 +34,8 @@ class inputFrame(ctk.CTkFrame):
 
     # Captura de la proposicion
     self.entry = ctk.CTkEntry(self, placeholder_text="Ingrese la proposicion lógica...", font=("Helvetica", 17, "bold"))
-    self.entry.pack(padx=60, pady=20, fill="x")
+    self.entry.pack(padx=30, pady=20, fill="x")
 
     # Boton añadir proposicion
     self.añadir = ctk.CTkButton(self, text="Añadir proposicion", font=("Helvetica", 14, "bold"), command=self.master.añadirProposicion)
-    self.añadir.pack(padx=100, fill="x")
+    self.añadir.pack(padx=80, fill="x")
